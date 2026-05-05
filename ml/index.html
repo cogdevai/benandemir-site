@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benan D. Allan — ML / Data &amp; AI Technical Portfolio</title>
+<meta name="description" content="Technical portfolio — predictive intelligence systems, ML pipelines, feature engineering, model architecture, and production deployment across health, behavioural, and financial domains. For engineering and data teams.">
+<link rel="canonical" href="https://www.benandemir.com/ml/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.benandemir.com/ml/">
+<meta property="og:title" content="Benan D. Allan — ML / Data &amp; AI Technical Portfolio">
+<meta property="og:description" content="Predictive intelligence systems, ML pipelines, feature engineering, model architecture, and production deployment.">
+<meta property="og:image" content="https://www.benandemir.com/benan.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS — reused from benandemir.com
+   ============================================================ */
+:root{
+    --bg:#FAFAF8;
+    --bg-warm:#F5F0EB;
+    --bg-cream:#F0EBE3;
+    --bg-mist:#EFEAE3;
+    --ink:#1a1a1a;
+    --ink-s:rgba(26,26,26,0.55);
+    --ink-m:rgba(26,26,26,0.3);
+    --ink-l:rgba(26,26,26,0.08);
+    --accent:#3D2066;
+    --accent-l:rgba(61,32,102,0.08);
+    --warm:#B85C3D;
+    --warm-l:rgba(184,92,61,0.12);
+    --peach:#F0A882;
+    --sage:#7A8E6B;
+    --sage-l:rgba(122,142,107,0.1);
+    --serif:'Instrument Serif',Georgia,serif;
+    --sans:'Inter',-apple-system,sans-serif;
+    --mono:'Space Mono',monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden}
+::selection{background:var(--accent-l);color:var(--accent)}
+
+/* SCROLL PROGRESS */
+.progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--warm),var(--accent));z-index:200;transition:width .1s linear}
+
+/* TEXTURE + SHAPES + PARTICLES */
+.texture{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.3;
+    background-image:radial-gradient(circle,var(--ink-l) 1px,transparent 1px);
+    background-size:32px 32px}
+.shapes{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sh{position:absolute;border-radius:50%;opacity:0.045;filter:blur(20px)}
+.sh-1{width:800px;height:800px;background:var(--warm);top:-20%;right:-15%;animation:shF 30s ease-in-out infinite}
+.sh-2{width:600px;height:600px;background:var(--accent);bottom:-15%;left:-10%;animation:shF 25s ease-in-out infinite reverse}
+.sh-3{width:400px;height:400px;background:var(--sage);top:40%;left:50%;animation:shF 35s ease-in-out infinite 8s}
+@keyframes shF{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,60px) scale(1.1)}}
+
+.ptcl{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.ptcl span{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--ink-l);animation:drift linear infinite}
+@keyframes drift{from{transform:translateY(110vh) translateX(0)}to{transform:translateY(-10vh) translateX(40px)}}
+
+.wrap{position:relative;z-index:1}
+
+/* REVEAL ANIMATIONS */
+.rv{opacity:0;transform:translateY(44px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.rv.v{opacity:1;transform:translateY(0)}
+.rv-l{opacity:0;transform:translateX(-50px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}.rv-l.v{opacity:1;transform:translateX(0)}
+.rv-r{opacity:0;transform:translateX(50px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}.rv-r.v{opacity:1;transform:translateX(0)}
+.rv-s{opacity:0;transform:scale(0.92);transition:opacity 1.1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1)}.rv-s.v{opacity:1;transform:scale(1)}
+.stg>*{transition-delay:calc(var(--i,0)*.12s)}
+
+.wr{display:inline-block}
+.wr span{display:inline-block;opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.wr.v span{opacity:1;transform:translateY(0)}
+.wr.v span:nth-child(1){transition-delay:.05s}
+.wr.v span:nth-child(2){transition-delay:.15s}
+.wr.v span:nth-child(3){transition-delay:.25s}
+.wr.v span:nth-child(4){transition-delay:.35s}
+.wr.v span:nth-child(5){transition-delay:.45s}
+.wr.v span:nth-child(6){transition-delay:.55s}
+.wr.v span:nth-child(7){transition-delay:.65s}
+.wr.v span:nth-child(8){transition-delay:.75s}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+.nav.scrolled{background:rgba(250,250,248,0.85);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);box-shadow:0 1px 0 var(--ink-l)}
+.nav-name{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{color:var(--ink-s);font-size:13px;text-decoration:none;font-weight:500;letter-spacing:.02em;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links .nb{padding:9px 22px;border-radius:100px;background:var(--ink);color:var(--bg);font-weight:600;font-size:12px;letter-spacing:.02em}
+.nav-links .nb:hover{background:var(--accent);color:white}
+.nav-tog{display:none;background:none;border:none;color:var(--ink);font-size:22px;cursor:pointer}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:140px 40px 120px;position:relative}
+.hero-inner{max-width:1100px;width:100%;margin:0 auto}
+.hero-eyebrow{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-m);margin-bottom:28px;display:flex;align-items:center;gap:14px;opacity:0;animation:fu .9s .15s cubic-bezier(.16,1,.3,1) forwards}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--ink-m)}
+.hero h1{font-family:var(--serif);font-size:clamp(48px,8vw,108px);font-weight:400;line-height:1.0;letter-spacing:-.03em;margin-bottom:32px;opacity:0;animation:fu .9s .3s cubic-bezier(.16,1,.3,1) forwards;max-width:14ch}
+.hero h1 em{font-style:italic;color:var(--warm)}
+.hero-sub{font-size:clamp(15px,1.5vw,18px);color:var(--ink-s);max-width:620px;margin-bottom:36px;font-weight:300;line-height:1.8;opacity:0;animation:fu .9s .45s cubic-bezier(.16,1,.3,1) forwards}
+.hero-meta{display:flex;align-items:center;gap:20px;margin-bottom:36px;opacity:0;animation:fu .9s .55s cubic-bezier(.16,1,.3,1) forwards;flex-wrap:wrap}
+.hero-meta .dot{width:6px;height:6px;border-radius:50%;background:var(--sage);box-shadow:0 0 0 0 rgba(122,142,107,.5);animation:pulse 2.4s infinite}
+.hero-meta-item{font-size:12px;color:var(--ink-s);font-family:var(--mono);letter-spacing:.04em}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(122,142,107,.5)}70%{box-shadow:0 0 0 12px rgba(122,142,107,0)}100%{box-shadow:0 0 0 0 rgba(122,142,107,0)}}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fu .9s .65s cubic-bezier(.16,1,.3,1) forwards}
+.btn-dark{padding:14px 32px;border-radius:100px;background:var(--ink);color:var(--bg);font-weight:600;font-size:14px;text-decoration:none;transition:all .3s;letter-spacing:.01em;display:inline-flex;align-items:center;gap:8px}
+.btn-dark:hover{background:var(--accent);color:white;transform:translateY(-2px);box-shadow:0 8px 30px rgba(61,32,102,0.18)}
+.btn-line{padding:14px 32px;border-radius:100px;border:1px solid var(--ink-l);color:var(--ink-s);font-weight:500;font-size:14px;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+.btn-line:hover{border-color:var(--ink-s);color:var(--ink);transform:translateY(-2px)}
+
+.scroll-cue{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fu .8s 1.2s cubic-bezier(.16,1,.3,1) forwards}
+.scroll-cue .lbl{font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-m)}
+.scroll-cue .ln{width:1px;height:36px;background:linear-gradient(to bottom,var(--ink-m),transparent);animation:scrollLn 2s ease-in-out infinite}
+@keyframes scrollLn{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fu{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* MARQUEE */
+.marquee{padding:34px 0;border-top:1px solid var(--ink-l);border-bottom:1px solid var(--ink-l);background:var(--bg);overflow:hidden;position:relative}
+.marquee::before,.marquee::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.marquee::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.marquee::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+.marquee-track{display:flex;width:max-content;gap:48px;animation:mq 60s linear infinite;align-items:center}
+.mq-item{font-family:var(--serif);font-size:32px;font-style:italic;color:var(--ink);white-space:nowrap;display:flex;align-items:center;gap:48px}
+.mq-item::after{content:'·';color:var(--warm);font-size:36px;font-style:normal}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.sec{padding:160px 40px;position:relative}
+.sec-warm{background:var(--bg-warm)}
+.sec-cream{background:var(--bg-cream)}
+.sec-mist{background:var(--bg-mist)}
+.sec-ink{background:var(--ink);color:var(--bg)}
+.sec-ink .sec-label{color:rgba(255,255,255,0.35)}
+.sec-ink .sec-p{color:rgba(255,255,255,0.65)}
+.sec-ink .sec-h{color:var(--bg)}
+.sec-warm::before,.sec-cream::before,.sec-mist::before{content:'';position:absolute;top:-1px;left:0;right:0;height:80px;background:linear-gradient(to bottom,var(--bg),transparent);pointer-events:none}
+.sec-warm::before{background:linear-gradient(to bottom,var(--bg),var(--bg-warm))}
+.container{max-width:1100px;margin:0 auto}
+.container-w{max-width:1240px;margin:0 auto}
+.sec-label{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-m);margin-bottom:16px}
+.sec-h{font-family:var(--serif);font-size:clamp(34px,5.5vw,60px);font-weight:400;line-height:1.05;letter-spacing:-.02em;margin-bottom:20px}
+.sec-h em{font-style:italic;color:var(--warm)}
+.sec-p{font-size:16px;color:var(--ink-s);max-width:680px;line-height:1.8;font-weight:300}
+.sec-head{text-align:center;margin-bottom:80px}
+
+/* MANIFESTO — two-column intro */
+.manifesto-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:start}
+.manifesto-grid p{font-size:17px;color:var(--ink-s);line-height:1.85;font-weight:300;margin-bottom:20px}
+.manifesto-grid p strong{color:var(--ink);font-weight:500}
+.manifesto-grid p em{font-style:italic;color:var(--warm)}
+
+/* PILLAR CARDS — capabilities */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+.pillar{background:var(--bg);border:1px solid var(--ink-l);border-radius:24px;padding:36px 32px;transition:all .4s;position:relative;overflow:hidden}
+.pillar:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(26,26,26,.08);border-color:var(--ink-m)}
+.pillar-num{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--warm);margin-bottom:24px}
+.pillar-t{font-family:var(--serif);font-size:26px;line-height:1.15;margin-bottom:14px;letter-spacing:-.01em}
+.pillar-t em{font-style:italic;color:var(--warm)}
+.pillar-d{font-size:14px;color:var(--ink-s);line-height:1.7;font-weight:300;margin-bottom:20px}
+.pillar-tags{display:flex;flex-wrap:wrap;gap:8px}
+.pillar-tags span{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink-s);padding:5px 10px;border-radius:100px;background:var(--bg-warm);border:1px solid var(--ink-l)}
+
+/* PROJECT FEATURE CARDS */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:40px}
+.project{background:var(--bg);border:1px solid var(--ink-l);border-radius:28px;padding:44px 40px;transition:all .4s;position:relative;overflow:hidden}
+.project:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(26,26,26,.08);border-color:var(--ink-m)}
+.project-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.project-eyebrow{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--warm)}
+.project-status{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:5px 12px;border-radius:100px;background:var(--sage-l);color:var(--sage);border:1px solid rgba(122,142,107,.25)}
+.project-status.live{background:var(--sage-l);color:var(--sage)}
+.project-status.beta{background:var(--warm-l);color:var(--warm)}
+.project-status.dev{background:var(--accent-l);color:var(--accent)}
+.project h3{font-family:var(--serif);font-size:38px;font-weight:400;line-height:1.05;letter-spacing:-.02em;margin-bottom:8px}
+.project h3 em{font-style:italic;color:var(--warm)}
+.project-tag{font-family:var(--mono);font-size:11px;color:var(--ink-s);letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+.project-desc{font-size:15px;color:var(--ink-s);line-height:1.75;font-weight:300;margin-bottom:24px}
+.project-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:22px;padding:20px 0;border-top:1px solid var(--ink-l);border-bottom:1px solid var(--ink-l)}
+.project-meta-item{font-size:13px}
+.project-meta-item .k{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-m);margin-bottom:6px;display:block}
+.project-meta-item .v{font-size:13px;color:var(--ink);font-weight:500;line-height:1.45}
+.project-stack{display:flex;flex-wrap:wrap;gap:6px}
+.project-stack span{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--ink-s);padding:4px 10px;border-radius:100px;background:var(--bg-warm)}
+
+/* LEAD PROJECT — full-width, inverted */
+.project-lead{grid-column:1 / -1;background:var(--ink);color:var(--bg);border-color:transparent;padding:52px 48px}
+.project-lead:hover{transform:translateY(-4px);box-shadow:0 30px 80px rgba(26,26,26,.18);border-color:transparent}
+.project-lead .project-eyebrow{color:var(--peach)}
+.project-lead h3{color:var(--bg);font-size:46px}
+.project-lead h3 em{color:var(--peach)}
+.project-lead .project-tag{color:rgba(255,255,255,0.5)}
+.project-lead .project-desc{color:rgba(255,255,255,0.72);font-size:15.5px}
+.project-lead .project-meta{border-color:rgba(255,255,255,0.12)}
+.project-lead .project-meta-item .k{color:rgba(255,255,255,0.4)}
+.project-lead .project-meta-item .v{color:rgba(255,255,255,0.92)}
+.project-lead .project-stack span{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1)}
+.project-lead .project-status{background:rgba(122,142,107,0.18);color:#a8c293;border-color:rgba(122,142,107,0.3)}
+.lead-grid{display:grid;grid-template-columns:1.5fr .85fr;gap:48px;align-items:start}
+.lead-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;padding:28px 24px;border:1px solid rgba(255,255,255,0.12);border-radius:18px;background:rgba(255,255,255,0.02)}
+.lead-stats .n{font-family:var(--serif);font-size:38px;line-height:1;color:var(--peach);letter-spacing:-.02em}
+.lead-stats .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:8px;line-height:1.4}
+.lead-arch{margin-top:18px;padding:22px 24px;border:1px dashed rgba(255,255,255,0.18);border-radius:14px;background:rgba(255,255,255,0.02)}
+.lead-arch .k{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--peach);margin-bottom:10px;display:block}
+.lead-arch .v{font-size:13px;color:rgba(255,255,255,0.78);line-height:1.7;font-weight:300}
+
+/* PRINT-ONLY INTRO COVER — hidden on screen, shown as page 1 of PDF */
+.print-intro{display:none}
+
+/* CASE STUDY ROWS — for predictive systems */
+.case{display:grid;grid-template-columns:.4fr 1.6fr;gap:48px;align-items:start;padding:40px 0;border-top:1px solid var(--ink-l)}
+.case:last-child{border-bottom:1px solid var(--ink-l)}
+.case-side{position:sticky;top:120px}
+.case-org{font-family:var(--serif);font-size:28px;line-height:1.1;letter-spacing:-.01em;margin-bottom:6px}
+.case-org em{font-style:italic;color:var(--warm)}
+.case-role{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-s);margin-bottom:6px}
+.case-when{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-m)}
+.case-body p{font-size:15px;color:var(--ink-s);line-height:1.8;font-weight:300;margin-bottom:14px}
+.case-body p strong{color:var(--ink);font-weight:500}
+.case-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:20px;padding-top:20px;border-top:1px dashed var(--ink-l)}
+.case-stat .n{font-family:var(--serif);font-size:36px;line-height:1;color:var(--warm);letter-spacing:-.01em}
+.case-stat .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-m);margin-top:6px}
+
+/* PIPELINE DIAGRAM */
+.pipeline{margin-top:50px;padding:48px 32px;border:1px solid var(--ink-l);border-radius:24px;background:var(--bg);overflow-x:auto}
+.pipeline-row{display:flex;gap:18px;align-items:stretch;min-width:max-content}
+.pipe-stage{flex:1;min-width:180px;padding:22px 20px;border:1px dashed var(--ink-l);border-radius:14px;background:var(--bg-warm);position:relative}
+.pipe-stage .step{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.18em;color:var(--warm);margin-bottom:8px}
+.pipe-stage .name{font-family:var(--serif);font-size:18px;line-height:1.15;margin-bottom:10px;letter-spacing:-.01em}
+.pipe-stage .det{font-size:12px;color:var(--ink-s);line-height:1.6;font-weight:300}
+.pipe-stage::after{content:'→';position:absolute;right:-22px;top:50%;transform:translateY(-50%);color:var(--warm);font-size:18px;font-family:var(--serif);font-style:italic;z-index:2}
+.pipe-stage:last-child::after{display:none}
+
+/* FEATURE LIST */
+.features{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--ink-l);border:1px solid var(--ink-l);border-radius:20px;overflow:hidden;margin-top:40px}
+.feat{background:var(--bg);padding:28px 28px}
+.feat-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.feat-name{font-family:var(--serif);font-size:22px;font-style:italic;letter-spacing:-.01em}
+.feat-domain{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--warm)}
+.feat-desc{font-size:13.5px;color:var(--ink-s);line-height:1.7;font-weight:300}
+
+/* DEPLOYMENT GRID */
+.deploy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.deploy-card{padding:28px 24px;border:1px solid var(--ink-l);border-radius:18px;background:var(--bg);transition:all .3s}
+.deploy-card:hover{border-color:var(--ink-s);transform:translateY(-2px)}
+.deploy-name{font-family:var(--serif);font-size:22px;line-height:1.15;margin-bottom:8px;letter-spacing:-.01em}
+.deploy-name em{font-style:italic;color:var(--warm)}
+.deploy-detail{font-size:12.5px;color:var(--ink-s);line-height:1.7;font-weight:300}
+
+/* STACK GRID — methods & tools */
+.stack{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;border-top:1px solid var(--ink-l);border-left:1px solid var(--ink-l)}
+.stack-grp{padding:28px 24px;border-right:1px solid var(--ink-l);border-bottom:1px solid var(--ink-l)}
+.stack-grp h4{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--warm);margin-bottom:18px}
+.stack-grp ul{list-style:none}
+.stack-grp li{font-size:13px;color:var(--ink);line-height:1.85;font-weight:400}
+.stack-grp li small{font-family:var(--mono);font-size:9.5px;color:var(--ink-m);letter-spacing:.04em;display:block}
+
+/* PAPERS */
+.papers{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:40px}
+.paper{padding:28px 28px;border:1px solid var(--ink-l);border-radius:20px;background:var(--bg);transition:all .3s}
+.paper:hover{border-color:var(--ink-s)}
+.paper-where{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.paper-t{font-family:var(--serif);font-size:20px;line-height:1.25;letter-spacing:-.01em;margin-bottom:8px}
+.paper-meta{font-size:12px;color:var(--ink-s);font-weight:300}
+
+/* CONTACT */
+.contact{padding:160px 40px;text-align:center;position:relative;overflow:hidden}
+.contact-actions{display:flex;justify-content:center;gap:14px;margin-top:40px;flex-wrap:wrap}
+.contact .btn-dark{background:var(--bg);color:var(--ink)}
+.contact .btn-dark:hover{background:var(--warm);color:white}
+.contact .btn-line{border-color:rgba(255,255,255,0.18);color:rgba(255,255,255,0.7)}
+.contact .btn-line:hover{border-color:rgba(255,255,255,0.45);color:white}
+
+/* FOOTER */
+.footer{padding:48px 40px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--ink-m);letter-spacing:.06em;border-top:1px solid var(--ink-l)}
+.footer a{color:var(--ink-s);text-decoration:none}
+.footer a:hover{color:var(--warm)}
+
+/* RESPONSIVE */
+/* PRINT — clean PDF export */
+@media print{
+    @page{size:A4;margin:12mm 10mm}
+    html,body{background:#fff !important;color:#1a1a1a !important;font-size:9.5pt;line-height:1.5}
+
+    /* Hide chrome */
+    .nav,.progress,.texture,.shapes,.ptcl,.scroll-cue,.marquee,.footer,.btn-dark,.btn-line,.hero-actions,.contact-actions{display:none !important}
+    .wrap{position:static}
+
+    /* Force EVERY animated/revealed element visible — covers .rv, .wr spans, and hero animation chain */
+    *,*::before,*::after{animation:none !important;transition:none !important}
+    .rv,.rv-l,.rv-r,.rv-s,.wr,.wr span,
+    .hero-eyebrow,.hero h1,.hero-sub,.hero-meta,.hero-actions{opacity:1 !important;transform:none !important}
+    .wr span{display:inline !important}
+
+    /* PDF cover/intro — shown only in print */
+    .print-intro{display:flex !important;flex-direction:column;justify-content:space-between;min-height:265mm;padding:10mm 4mm 4mm;page-break-after:always;break-after:page;color:#1a1a1a}
+    .pi-top{font-family:var(--mono);font-size:8pt;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,26,26,0.5);display:flex;justify-content:space-between;align-items:center;padding-bottom:6mm;border-bottom:1px solid rgba(26,26,26,0.12)}
+    .pi-rule{flex:1;height:1px;background:rgba(26,26,26,0.12);margin:0 8mm}
+    .pi-mid{padding:30mm 0 0}
+    .pi-name{font-family:var(--serif);font-size:48pt;line-height:.95;letter-spacing:-.03em;margin-bottom:8mm}
+    .pi-name em{font-style:italic;color:var(--warm)}
+    .pi-role{font-family:var(--mono);font-size:9pt;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--warm);margin-bottom:12mm}
+    .pi-bio{font-family:var(--serif);font-size:14pt;font-style:italic;line-height:1.5;color:#1a1a1a;max-width:165mm;margin-bottom:12mm}
+    .pi-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6mm;padding:6mm 0;border-top:1px solid rgba(26,26,26,0.12);border-bottom:1px solid rgba(26,26,26,0.12);margin-bottom:8mm}
+    .pi-stat .n{font-family:var(--serif);font-size:22pt;line-height:1;color:var(--warm);letter-spacing:-.02em;margin-bottom:3mm}
+    .pi-stat .l{font-family:var(--mono);font-size:7.5pt;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(26,26,26,0.55);line-height:1.4}
+    .pi-bot{display:grid;grid-template-columns:1fr 1fr;gap:8mm;font-family:var(--mono);font-size:8.5pt;color:rgba(26,26,26,0.7);letter-spacing:.04em}
+    .pi-bot strong{display:block;color:rgba(26,26,26,0.4);font-weight:700;font-size:7pt;letter-spacing:.22em;text-transform:uppercase;margin-bottom:2mm}
+    .pi-bot a{color:#1a1a1a !important;text-decoration:none}
+    .pi-bot p{margin-bottom:1.5mm}
+    .pi-foot{padding-top:6mm;border-top:1px solid rgba(26,26,26,0.12);font-family:var(--mono);font-size:7.5pt;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(26,26,26,0.4);display:flex;justify-content:space-between;margin-top:8mm}
+
+    /* Hide live hero in print — intro replaces it */
+    .hero{display:none !important}
+
+    /* Print-only: drop Selected Research + Contact (contact info already on cover) */
+    #research,#contact{display:none !important}
+
+    /* Force a page break before the projects section so it starts clean */
+    #projects,#systems,#stack{page-break-before:auto;break-before:auto}
+
+    /* Section rhythm */
+    section,.sec,.contact{padding:10mm 0 !important;page-break-inside:auto}
+    .container,.container-w{max-width:100% !important;padding:0 4mm}
+
+    /* Typography for print */
+    .sec-h{font-size:20pt !important;margin-bottom:4mm !important;line-height:1.1 !important}
+    .sec-p{font-size:9.5pt !important;line-height:1.55 !important;max-width:100% !important}
+    .sec-head{margin-bottom:6mm !important;text-align:left !important}
+
+    /* Backgrounds */
+    .sec-warm,.sec-cream,.sec-mist{background:#FAFAF8 !important}
+    .sec-warm::before,.sec-cream::before,.sec-mist::before{display:none !important}
+    .sec-ink,.contact{background:#1a1a1a !important;color:#fff !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    .contact .sec-h{color:#fff !important}
+    .contact .sec-p{color:rgba(255,255,255,0.7) !important}
+
+    /* Grids — keep multi-column on print */
+    .manifesto-grid{grid-template-columns:.7fr 1.3fr !important;gap:8mm !important}
+    .pillars{grid-template-columns:repeat(3,1fr) !important;gap:4mm !important}
+    .projects{grid-template-columns:repeat(2,1fr) !important;gap:4mm !important}
+    .features{grid-template-columns:repeat(2,1fr) !important}
+    .deploy-grid{grid-template-columns:repeat(4,1fr) !important;gap:3mm !important}
+    .stack{grid-template-columns:repeat(4,1fr) !important}
+    .papers{grid-template-columns:repeat(2,1fr) !important;gap:4mm !important}
+
+    /* Cards — strip shadows, tight padding */
+    .pillar,.project,.feat,.deploy-card,.paper{box-shadow:none !important;border:1px solid rgba(26,26,26,0.16) !important;background:#fff !important;padding:5mm !important;page-break-inside:avoid;break-inside:avoid}
+    .pillar-t,.project h3,.deploy-name,.paper-t{font-size:13pt !important;line-height:1.15 !important}
+    .pillar-d,.project-desc,.deploy-detail,.feat-desc{font-size:9pt !important;line-height:1.5 !important}
+    .pillar-num,.project-eyebrow,.feat-domain,.paper-where,.deploy-card .deploy-name em{font-size:7.5pt !important}
+
+    /* Lead project — keep dark background in print */
+    .project-lead{background:#1a1a1a !important;color:#fff !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;border:none !important;grid-column:1 / -1 !important;padding:8mm !important}
+    .project-lead h3{color:#fff !important;font-size:18pt !important}
+    .lead-grid{grid-template-columns:1.4fr .9fr !important;gap:6mm !important}
+    .lead-stats{padding:5mm !important}
+    .lead-stats .n{font-size:18pt !important}
+
+    /* Case studies */
+    .case{display:grid !important;grid-template-columns:.4fr 1.6fr !important;gap:6mm !important;padding:5mm 0 !important;page-break-inside:avoid}
+    .case-side{position:static !important}
+    .case-org{font-size:14pt !important}
+    .case-body p{font-size:9pt !important;line-height:1.55 !important}
+    .case-stat{grid-template-columns:repeat(3,1fr) !important;gap:4mm !important}
+    .case-stat .n{font-size:18pt !important}
+
+    /* Pipeline — lay out as compact row of 6 */
+    .pipeline{overflow:visible !important;padding:5mm !important}
+    .pipeline-row{flex-wrap:wrap !important;min-width:0 !important;gap:3mm !important}
+    .pipe-stage{flex:0 0 calc(33.33% - 8px) !important;min-width:0 !important;padding:4mm !important;page-break-inside:avoid}
+    .pipe-stage::after{display:none !important}
+    .pipe-stage .name{font-size:11pt !important}
+    .pipe-stage .det{font-size:8.5pt !important}
+
+    /* Stack grid */
+    .stack-grp{padding:4mm !important;page-break-inside:avoid}
+    .stack-grp h4{font-size:7.5pt !important;margin-bottom:3mm !important}
+    .stack-grp li{font-size:9pt !important;line-height:1.6 !important}
+
+    /* Allow large containers to break naturally */
+    .pillars,.projects,.features,.deploy-grid,.papers,.stack,.pipeline,.pipeline-row{page-break-inside:auto;break-inside:auto}
+
+    /* Hyperlinks plain */
+    a{color:inherit !important;text-decoration:none}
+}
+
+@media (max-width:900px){
+    .nav{padding:16px 22px}
+    .nav-links{display:none}
+    .nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--bg);padding:22px;border-top:1px solid var(--ink-l);gap:18px}
+    .nav-tog{display:block}
+    .hero{padding:120px 22px 90px}
+    .sec{padding:100px 22px}
+    .manifesto-grid{grid-template-columns:1fr;gap:32px}
+    .pillars{grid-template-columns:1fr}
+    .projects{grid-template-columns:1fr}
+    .project-lead{padding:36px 26px}
+    .project-lead h3{font-size:34px}
+    .lead-grid{grid-template-columns:1fr;gap:24px}
+    .case{grid-template-columns:1fr;gap:20px}
+    .case-side{position:static}
+    .features{grid-template-columns:1fr}
+    .deploy-grid{grid-template-columns:repeat(2,1fr)}
+    .stack{grid-template-columns:repeat(2,1fr)}
+    .papers{grid-template-columns:1fr}
+    .case-stat{grid-template-columns:repeat(3,1fr);gap:12px}
+    .case-stat .n{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="prog"></div>
+<div class="texture"></div>
+<div class="shapes"><div class="sh sh-1"></div><div class="sh sh-2"></div><div class="sh sh-3"></div></div>
+<div class="ptcl" id="ptcl"></div>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="nav" id="nav">
+    <a href="/" class="nav-name">Benan D. Allan</a>
+    <div class="nav-links" id="navLinks">
+        <a href="/">← Home</a>
+        <a href="#manifesto">Approach</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#projects">Projects</a>
+        <a href="#systems">Systems</a>
+        <a href="#pipeline">Pipelines</a>
+        <a href="#stack">Stack</a>
+        <a href="Benan_Allan_DataAI_Portfolio.pdf" class="nb" target="_blank" rel="noopener">PDF ↓</a>
+    </div>
+    <button class="nav-tog" id="navTog" aria-label="Toggle menu">≡</button>
+</nav>
+
+<div class="wrap">
+
+<!-- ============================================================
+     PRINT INTRO — page 1 of the PDF (hidden on screen)
+     ============================================================ -->
+<section class="print-intro">
+    <div class="pi-top">
+        <span>Benan D. Allan</span>
+        <span class="pi-rule"></span>
+        <span>Technical Portfolio · Data &amp; AI</span>
+    </div>
+
+    <div class="pi-mid">
+        <h1 class="pi-name">Benan D. <em>Allan</em></h1>
+        <div class="pi-role">AI Systems Architect · PhD Cognitive &amp; Computer Scientist</div>
+        <p class="pi-bio">A decade of designing predictive intelligence systems for health and behavioural domains — interrogating what each data point truly represents, establishing evidential weight through statistical testing, and constructing variables when the signal doesn't exist in the raw data. Background spanning cognitive science and brain &amp; computer science, applied to the foundational layer that sits above the modelling layer.</p>
+
+        <div class="pi-stats">
+            <div class="pi-stat"><div class="n">10+ yrs</div><div class="l">Predictive systems experience</div></div>
+            <div class="pi-stat"><div class="n">6M</div><div class="l">Users in production · Stardust</div></div>
+            <div class="pi-stat"><div class="n">9 dom</div><div class="l">On-device temporal CNN · Nar</div></div>
+            <div class="pi-stat"><div class="n">PhD</div><div class="l">Padova / Edinburgh</div></div>
+        </div>
+
+        <div class="pi-bot">
+            <div>
+                <strong>Contact</strong>
+                <p><a href="mailto:bnndmr@gmail.com">bnndmr@gmail.com</a></p>
+                <p>+33 7 88 51 52 08</p>
+                <p>Perpignan, France</p>
+            </div>
+            <div>
+                <strong>Online</strong>
+                <p><a href="https://www.benandemir.com">benandemir.com</a></p>
+                <p><a href="https://www.cogdev.ai">cogdev.ai</a> · CID consultancy</p>
+                <p>Languages: EN · TR · IT · ES · FR</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="pi-foot">
+        <span>Selected work · 2014 — 2026</span>
+        <span>Page 1 / Cover</span>
+    </div>
+</section>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="top">
+    <div class="hero-inner">
+        <div class="hero-eyebrow">Technical Portfolio · Data &amp; AI Systems · 2014 — 2026</div>
+        <h1>Predictive intelligence, <em>built from the data up.</em></h1>
+        <p class="hero-sub">A technical portfolio for engineering and data teams. A decade of designing predictive systems for health, behavioural, and financial domains — schemas, feature engineering, model architecture, ML pipelines, serving infrastructure, and production deployment. The architecture decisions that determine whether a model works in production are usually made before training starts. That's the layer this work lives in.</p>
+        <div class="hero-meta">
+            <span class="dot"></span>
+            <span class="hero-meta-item">Available for select consulting · CID</span>
+            <span class="hero-meta-item">·</span>
+            <span class="hero-meta-item">Perpignan / Remote</span>
+        </div>
+        <div class="hero-actions">
+            <a href="#projects" class="btn-dark">See the projects →</a>
+            <a href="#systems" class="btn-line">Predictive systems</a>
+        </div>
+    </div>
+    <div class="scroll-cue">
+        <span class="lbl">Scroll</span>
+        <div class="ln"></div>
+    </div>
+</section>
+
+<!-- ============================================================
+     MARQUEE — domain keywords
+     ============================================================ -->
+<div class="marquee">
+    <div class="marquee-track">
+        <div class="mq-item">Predictive Architecture</div>
+        <div class="mq-item">Feature Engineering</div>
+        <div class="mq-item">Multimodal Fusion</div>
+        <div class="mq-item">Statistical Testing</div>
+        <div class="mq-item">Behavioural Modelling</div>
+        <div class="mq-item">EEG · fMRI · GSR</div>
+        <div class="mq-item">ML Pipelines</div>
+        <div class="mq-item">Deployment &amp; MLOps</div>
+        <!-- duplicate for seamless loop -->
+        <div class="mq-item">Predictive Architecture</div>
+        <div class="mq-item">Feature Engineering</div>
+        <div class="mq-item">Multimodal Fusion</div>
+        <div class="mq-item">Statistical Testing</div>
+        <div class="mq-item">Behavioural Modelling</div>
+        <div class="mq-item">EEG · fMRI · GSR</div>
+        <div class="mq-item">ML Pipelines</div>
+        <div class="mq-item">Deployment &amp; MLOps</div>
+    </div>
+</div>
+
+<!-- ============================================================
+     MANIFESTO — data philosophy
+     ============================================================ -->
+<section class="sec" id="manifesto">
+    <div class="container">
+        <div class="manifesto-grid">
+            <div>
+                <p class="sec-label rv">Approach</p>
+                <h2 class="sec-h rv">What does this data <em>actually mean?</em></h2>
+            </div>
+            <div>
+                <p class="rv">Most teams skip the foundational layer — what each data point truly represents, how much evidential weight it carries, whether the signal is even there to be modelled. <strong>I start there.</strong></p>
+                <p class="rv">My work sits above the modelling layer: <em>representational data design</em>, evidential weighting through statistical testing, and constructing variables when the signal doesn't exist in the raw stream. The architecture decisions made before a model is trained — those are usually the ones that determine whether it works in production.</p>
+                <p class="rv">A decade across cognitive neuroscience, women's health, behavioural coaching, immersive tech, and quantitative finance. Different domains, same method.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     CAPABILITIES — pillars
+     ============================================================ -->
+<section class="sec sec-warm" id="capabilities">
+    <div class="container">
+        <div class="sec-head">
+            <p class="sec-label rv">Capabilities</p>
+            <h2 class="sec-h rv">Six layers of an<br><em>intelligent system.</em></h2>
+            <p class="sec-p rv" style="margin:0 auto">From interrogating raw data to shipping the model behind a production endpoint.</p>
+        </div>
+        <div class="pillars stg">
+            <div class="pillar rv" style="--i:0">
+                <div class="pillar-num">01 / Architecture</div>
+                <h3 class="pillar-t">Predictive system <em>architecture</em></h3>
+                <p class="pillar-d">End-to-end design of the system that turns signal into prediction — data flow, feature stores, model registry, serving layer, feedback loops.</p>
+                <div class="pillar-tags"><span>System design</span><span>Feature stores</span><span>Serving</span></div>
+            </div>
+            <div class="pillar rv" style="--i:1">
+                <div class="pillar-num">02 / Representation</div>
+                <h3 class="pillar-t">Representational <em>data design</em></h3>
+                <p class="pillar-d">Deciding what each data point means, what it can carry, and how it should be encoded before it ever reaches a model. The decisions made here determine ceiling.</p>
+                <div class="pillar-tags"><span>Schema</span><span>Encoding</span><span>Domain modelling</span></div>
+            </div>
+            <div class="pillar rv" style="--i:2">
+                <div class="pillar-num">03 / Features</div>
+                <h3 class="pillar-t">Feature <em>engineering</em></h3>
+                <p class="pillar-d">Constructing variables when the raw signal doesn't carry them — from temperature-derived ovulation indicators to absorption ratios in orderbook microstructure.</p>
+                <div class="pillar-tags"><span>BBT models</span><span>Microstructure</span><span>Derived signals</span></div>
+            </div>
+            <div class="pillar rv" style="--i:3">
+                <div class="pillar-num">04 / Evidence</div>
+                <h3 class="pillar-t">Evidential <em>weighting</em></h3>
+                <p class="pillar-d">Statistical testing applied at the data layer — what should this point count for, how confident is the signal, when does the model defer instead of guess.</p>
+                <div class="pillar-tags"><span>Hypothesis testing</span><span>Calibration</span><span>Uncertainty</span></div>
+            </div>
+            <div class="pillar rv" style="--i:4">
+                <div class="pillar-num">05 / Behaviour</div>
+                <h3 class="pillar-t">Cognitive &amp; behavioural <em>modelling</em></h3>
+                <p class="pillar-d">Modelling humans at the individual rather than aggregate level — personality, intention, trust, attention, decision-making. Built on a cognitive-science framework.</p>
+                <div class="pillar-tags"><span>Personalisation</span><span>Profiling</span><span>Cognitive traits</span></div>
+            </div>
+            <div class="pillar rv" style="--i:5">
+                <div class="pillar-num">06 / Deployment</div>
+                <h3 class="pillar-t">Pipelines &amp; <em>deployment</em></h3>
+                <p class="pillar-d">From notebook to production endpoint — pipeline orchestration, VPS / serverless deploy, monitoring, and the boring infra that keeps inference running at 3 AM.</p>
+                <div class="pillar-tags"><span>MLOps</span><span>Firebase</span><span>VPS / systemd</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     FEATURED PROJECTS — TinyTaste, AIM, Sniperbot, Nar
+     ============================================================ -->
+<section class="sec" id="projects">
+    <div class="container-w">
+        <div class="sec-head">
+            <p class="sec-label rv">Featured projects</p>
+            <h2 class="sec-h rv">Production systems <em>I've shipped.</em></h2>
+            <p class="sec-p rv" style="margin:0 auto">Each build below shows the full stack — data layer, models, training methodology, serving infrastructure, and operational scale.</p>
+        </div>
+        <div class="projects stg">
+
+            <!-- STARDUST PREDICTIONS — lead -->
+            <article class="project project-lead rv" style="--i:0">
+                <div class="project-head">
+                    <span class="project-eyebrow">Stardust · Head of Science &amp; AI · 2024 — 2026</span>
+                    <span class="project-status">Production · 6M users</span>
+                </div>
+                <div class="lead-grid">
+                    <div>
+                        <h3>Stardust <em>Predictions</em></h3>
+                        <div class="project-tag">BBT-based cycle, period &amp; ovulation prediction at 6M-user scale</div>
+                        <p class="project-desc">Built the AI function from the ground up — predictive models, data architecture, and ML infrastructure where none previously existed. BBT-derived models for cycle length, period length, and ovulation onset; spec-first feature design before training. Led a science team of 3 and guided an engineering team of 5 across research, architecture, and deployment.</p>
+                        <div class="project-meta">
+                            <div class="project-meta-item"><span class="k">Models</span><span class="v">BBT trend detection · cycle-length regression · ovulation classifier</span></div>
+                            <div class="project-meta-item"><span class="k">Training data</span><span class="v">BBT timeseries · cycle history · self-reported symptom &amp; behavioural events</span></div>
+                            <div class="project-meta-item"><span class="k">Eval</span><span class="v">80%+ real-time accuracy · 90%+ with optimal use, measured on next-cycle prediction</span></div>
+                            <div class="project-meta-item"><span class="k">Architecture</span><span class="v">Data layer + feature store + ML infra + model registry — built ground-up</span></div>
+                        </div>
+                        <div class="project-stack"><span>Python</span><span>Time series</span><span>BBT modelling</span><span>Feature engineering</span><span>Production ML</span><span>FemTech</span></div>
+                        <div class="lead-arch">
+                            <span class="k">System note</span>
+                            <span class="v">Inherited a product with no AI function. Designed and shipped: representational schema for the cycle-event data, BBT-derived feature constructors, a calibrated regression+classifier ensemble, a model registry, and the serving path back to the app — supporting 6M users in production.</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="lead-stats">
+                            <div><div class="n">6M</div><div class="l">Users in production</div></div>
+                            <div><div class="n">80%+</div><div class="l">Real-time accuracy</div></div>
+                            <div><div class="n">90%+</div><div class="l">Optimal-use accuracy</div></div>
+                            <div><div class="n">3 + 5</div><div class="l">Scientists / engineers led</div></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- NAR -->
+            <article class="project rv" style="--i:1">
+                <div class="project-head">
+                    <span class="project-eyebrow">CID · Women's health · 100% on-device ML</span>
+                    <span class="project-status dev">In development</span>
+                </div>
+                <h3>Nar</h3>
+                <div class="project-tag">Hormonal life-stage intelligence — Core ML, on device</div>
+                <p class="project-desc">iOS app covering 9 health domains across 6 hormonal life stages. Full science spec written before the model layer. All inference runs on-device — no server-side ML, no biometric data leaving the phone.</p>
+                <div class="project-meta">
+                    <div class="project-meta-item"><span class="k">Model</span><span class="v">Temporal CNN — 9 domain scores from 14-day biomarker windows (Float16, Core ML)</span></div>
+                    <div class="project-meta-item"><span class="k">Data inputs</span><span class="v">HRV · resting HR · sleep stages (deep/REM) · SpO2 · respiratory · skin-temp Δ · steps · recovery — via HealthKit &amp; Oura</span></div>
+                    <div class="project-meta-item"><span class="k">Architecture</span><span class="v">NARKit internal SPM module · BaselineNormalizer · BiomarkerVector · LifeStageLens · TrendDetector</span></div>
+                    <div class="project-meta-item"><span class="k">Stack</span><span class="v">SwiftUI · Core ML (.mlpackage) · HealthKit · Oura SDK · NARKit · NarInsightsTestKit (XCTest)</span></div>
+                </div>
+                <div class="project-stack"><span>Swift</span><span>Core ML</span><span>Temporal CNN</span><span>HealthKit</span><span>Oura</span><span>On-device</span><span>FemTech</span></div>
+            </article>
+
+            <!-- TINYTASTE -->
+            <article class="project rv" style="--i:2">
+                <div class="project-head">
+                    <span class="project-eyebrow">CID · Infant nutrition</span>
+                    <span class="project-status live">Live · App Store</span>
+                </div>
+                <h3>TinyTaste</h3>
+                <div class="project-tag">Personalised infant nutrition tracking</div>
+                <p class="project-desc">iOS app for tracking solids introduction in 0–12 month old infants. Behind it: a nutrient profile database, DRI-based deficiency reasoning, and a recommendation engine that personalises against feeding history rather than aggregate norms.</p>
+                <div class="project-meta">
+                    <div class="project-meta-item"><span class="k">Data layer</span><span class="v">Per-food <code>NutrientProfile</code> against 0–12mo DRI</span></div>
+                    <div class="project-meta-item"><span class="k">Reasoning</span><span class="v">Deficiency detection · stage-aware suggestions</span></div>
+                    <div class="project-meta-item"><span class="k">Stack</span><span class="v">SwiftUI · Firebase Auth / Firestore · Apple Sign-In</span></div>
+                    <div class="project-meta-item"><span class="k">Pricing</span><span class="v">Freemium · $4.99/mo · $39.99/yr</span></div>
+                </div>
+                <div class="project-stack"><span>Swift</span><span>Firestore</span><span>Nutrient modelling</span><span>iOS</span></div>
+            </article>
+
+            <!-- AIM -->
+            <article class="project rv" style="--i:3">
+                <div class="project-head">
+                    <span class="project-eyebrow">CID · Behaviour change</span>
+                    <span class="project-status beta">Beta</span>
+                </div>
+                <h3>AIM</h3>
+                <div class="project-tag">AI-powered goal achievement</div>
+                <p class="project-desc">An iOS goal-achievement app built on a cognitive-behavioural data model — goal decomposition, motivational state tracking, and AI-driven check-ins that adapt to the user's profile rather than running a fixed script.</p>
+                <div class="project-meta">
+                    <div class="project-meta-item"><span class="k">Data layer</span><span class="v">Goal · subgoal · check-in · motivational state</span></div>
+                    <div class="project-meta-item"><span class="k">Modelling</span><span class="v">Profile-conditioned LLM coaching · adaptive check-ins</span></div>
+                    <div class="project-meta-item"><span class="k">Stack</span><span class="v">SwiftUI · Firebase · Claude / GPT API</span></div>
+                    <div class="project-meta-item"><span class="k">Approach</span><span class="v">Behaviour-change theory grounded</span></div>
+                </div>
+                <div class="project-stack"><span>Swift</span><span>LLM</span><span>Behaviour change</span><span>iOS</span></div>
+            </article>
+
+            <!-- SNIPERBOT -->
+            <article class="project rv" style="--i:4">
+                <div class="project-head">
+                    <span class="project-eyebrow">CID · Quant / Polymarket</span>
+                    <span class="project-status live">Live · VPS</span>
+                </div>
+                <h3>Sniperbot</h3>
+                <div class="project-tag">Multi-asset prediction-market trading</div>
+                <p class="project-desc">An autonomous trading system for Polymarket's price-touch markets across BTC, ETH, SOL, XRP. Five generations of architecture — from naive sniping to a modular family-state engine with shared blockers, regime ladders, and evidence-based promotion gates.</p>
+                <div class="project-meta">
+                    <div class="project-meta-item"><span class="k">Data layer</span><span class="v">CLOB orderbook · whale wallets · structural microstructure</span></div>
+                    <div class="project-meta-item"><span class="k">Features</span><span class="v">Touch probability · absorb ratio · net minting · sweep vs stealth</span></div>
+                    <div class="project-meta-item"><span class="k">Modelling</span><span class="v">Family-state machine · per-family smart-sell · regime ladder</span></div>
+                    <div class="project-meta-item"><span class="k">Deploy</span><span class="v">VPS · systemd · Telegram alerts · auto-halt</span></div>
+                </div>
+                <div class="project-stack"><span>Python</span><span>Polymarket CLOB</span><span>Microstructure</span><span>Systemd</span></div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     PREDICTIVE SYSTEMS — case studies from CV
+     ============================================================ -->
+<section class="sec sec-warm" id="systems">
+    <div class="container">
+        <div class="sec-head">
+            <p class="sec-label rv">Predictive systems</p>
+            <h2 class="sec-h rv">Production AI <em>from the CV.</em></h2>
+            <p class="sec-p rv" style="margin:0 auto">Roles where I built or led the data and AI function — from architecture to deployment.</p>
+        </div>
+
+        <!-- STARDUST -->
+        <div class="case rv">
+            <div class="case-side">
+                <div class="case-org">Stardust <em>App</em></div>
+                <div class="case-role">Head of Science &amp; AI</div>
+                <div class="case-when">Jan 2024 — Feb 2026</div>
+            </div>
+            <div class="case-body">
+                <p><strong>Built the AI function from the ground up</strong> — designed and implemented all predictive models, data architecture, and ML infrastructure where none previously existed.</p>
+                <p>Developed <strong>BBT-based prediction models</strong> for cycle length, period length, and ovulation. Achieved 80%+ real-time accuracy and 90%+ with optimal use, serving <strong>6 million users</strong>.</p>
+                <p>Led a science team of 3 and guided an engineering team of 5 across research, architecture, and deployment.</p>
+                <div class="case-stat">
+                    <div><div class="n">6M</div><div class="l">Users served</div></div>
+                    <div><div class="n">80%+</div><div class="l">Real-time accuracy</div></div>
+                    <div><div class="n">90%+</div><div class="l">Optimal-use accuracy</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COACHHUB -->
+        <div class="case rv">
+            <div class="case-side">
+                <div class="case-org">Coach<em>Hub</em></div>
+                <div class="case-role">Senior Data &amp; Behavioural Scientist</div>
+                <div class="case-when">2022 — 2023</div>
+            </div>
+            <div class="case-body">
+                <p>Designed the <strong>end-to-end personalisation framework from scratch</strong> — mapping behavioural and personality data points across the full user journey to build dynamic user profiling.</p>
+                <p>Outcome: improved coach-coachee match quality by <strong>86%</strong> and lesson completion by <strong>56%</strong> within two weeks of deployment.</p>
+                <div class="case-stat">
+                    <div><div class="n">+86%</div><div class="l">Match quality</div></div>
+                    <div><div class="n">+56%</div><div class="l">Lesson completion</div></div>
+                    <div><div class="n">2 wks</div><div class="l">To impact</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GENOEMOTE -->
+        <div class="case rv">
+            <div class="case-side">
+                <div class="case-org">Geno<em>emote</em></div>
+                <div class="case-role">Interim CTO</div>
+                <div class="case-when">Dec 2021 — 2022</div>
+            </div>
+            <div class="case-body">
+                <p>Led research and technical strategy on <strong>measuring and analysing brain activity as a physiological signal</strong> for emotion recognition.</p>
+                <p>Designed the architecture of a trustworthiness rating system operating within VR environments — combining behavioural and neurological signals into a real-time assessment tool.</p>
+            </div>
+        </div>
+
+        <!-- HUMAINE AI -->
+        <div class="case rv">
+            <div class="case-side">
+                <div class="case-org">Humaine <em>AI</em></div>
+                <div class="case-role">Lead Cognitive &amp; Computer Scientist · Co-founder</div>
+                <div class="case-when">Nov 2020 — 2023</div>
+            </div>
+            <div class="case-body">
+                <p>Co-founded and led AI development of <strong>five proprietary models</strong> — including cognitive trait deduction from online behaviour, personality-driven product recommendation, and UX optimisation based on real-time user profiling.</p>
+                <p>Guided all model architecture and data design across client implementations, ensuring each system modelled human behaviour at an <em>individual</em> rather than aggregate level.</p>
+            </div>
+        </div>
+
+        <!-- H-FARM -->
+        <div class="case rv">
+            <div class="case-side">
+                <div class="case-org">H-<em>Farm</em></div>
+                <div class="case-role">Advanced Tech Lead Researcher &amp; PM</div>
+                <div class="case-when">2018 — 2019</div>
+            </div>
+            <div class="case-body">
+                <p>Led immersive technology development for <strong>Bulgari, Gucci, Fendi, Adidas, and Ferrari</strong> — VR shoe trial, virtual flagship stores, 3D product interaction systems.</p>
+                <p>Conducted behavioural data analysis of recorded in-VR human sessions to enhance system design, interaction patterns, and UX across all deployments.</p>
+            </div>
+        </div>
+
+        <!-- CID -->
+        <div class="case rv">
+            <div class="case-side">
+                <div class="case-org">CID</div>
+                <div class="case-role">Founder &amp; CEO</div>
+                <div class="case-when">March 2025 — Present</div>
+            </div>
+            <div class="case-body">
+                <p>AI consultancy delivering <strong>end-to-end solutions from architecture design to production deployment</strong>. Specialise in context-aware AI systems for companies that need to understand human behaviour at a contextual level.</p>
+                <p>Design custom ML pipelines including data selection, model architecture, and fine-tuning strategies. Parent company for the projects above.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================================
+     PIPELINE ANATOMY
+     ============================================================ -->
+<section class="sec" id="pipeline">
+    <div class="container">
+        <div class="sec-head">
+            <p class="sec-label rv">Pipeline anatomy</p>
+            <h2 class="sec-h rv">From raw signal to <em>served prediction.</em></h2>
+            <p class="sec-p rv" style="margin:0 auto">A canonical pipeline I'll adapt to a domain — what changes is the signal source and the feature constructor; the spine stays the same.</p>
+        </div>
+        <div class="pipeline rv">
+            <div class="pipeline-row">
+                <div class="pipe-stage"><div class="step">01 · Source</div><div class="name">Ingest</div><div class="det">Raw events, sensor streams, orderbook, biometrics. Validate at the boundary.</div></div>
+                <div class="pipe-stage"><div class="step">02 · Mean</div><div class="name">Representation</div><div class="det">What does each point <em>mean</em>? Schema, encoding, missing-data semantics.</div></div>
+                <div class="pipe-stage"><div class="step">03 · Build</div><div class="name">Features</div><div class="det">Construct variables that don't exist in the raw stream — derived signals, aggregations.</div></div>
+                <div class="pipe-stage"><div class="step">04 · Weight</div><div class="name">Evidence</div><div class="det">Statistical testing — what should this point count for, with what confidence.</div></div>
+                <div class="pipe-stage"><div class="step">05 · Model</div><div class="name">Predict</div><div class="det">Model architecture, training, calibration, fine-tuning where it earns its keep.</div></div>
+                <div class="pipe-stage"><div class="step">06 · Serve</div><div class="name">Deploy</div><div class="det">Endpoint, monitoring, drift detection, feedback loop back to step 02.</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     FEATURE ENGINEERING — selected examples
+     ============================================================ -->
+<section class="sec sec-mist" id="features">
+    <div class="container">
+        <div class="sec-head">
+            <p class="sec-label rv">Feature engineering</p>
+            <h2 class="sec-h rv">Variables that <em>weren't there yet.</em></h2>
+            <p class="sec-p rv" style="margin:0 auto">Derived signals built when the raw data didn't carry the answer — across domains.</p>
+        </div>
+        <div class="features stg">
+            <div class="feat rv" style="--i:0">
+                <div class="feat-head"><div class="feat-name">BBT-derived ovulation</div><div class="feat-domain">Stardust</div></div>
+                <div class="feat-desc">Basal body temperature isn't a label — it's a noisy waveform. Built features that surface the thermal shift defining ovulation onset across irregular cycles.</div>
+            </div>
+            <div class="feat rv" style="--i:1">
+                <div class="feat-head"><div class="feat-name">Touch probability</div><div class="feat-domain">Sniperbot</div></div>
+                <div class="feat-desc">Polymarket reach / dip markets resolve on path-dependent touches, not endpoints. 2× endpoint-probability fix replaces the naive mispricing estimate.</div>
+            </div>
+            <div class="feat rv" style="--i:2">
+                <div class="feat-head"><div class="feat-name">Absorb ratio &amp; net minting</div><div class="feat-domain">Sniperbot v3</div></div>
+                <div class="feat-desc">Structural microstructure signals built from anonymised orderbook flow — sweep vs stealth, absorption against the move, when whales are dark.</div>
+            </div>
+            <div class="feat rv" style="--i:3">
+                <div class="feat-head"><div class="feat-name">Cognitive trait deduction</div><div class="feat-domain">Humaine AI</div></div>
+                <div class="feat-desc">Latent personality features inferred from clickstream and dwell behaviour — built to drive personalisation at the individual rather than segment level.</div>
+            </div>
+            <div class="feat rv" style="--i:4">
+                <div class="feat-head"><div class="feat-name">Match-quality features</div><div class="feat-domain">CoachHub</div></div>
+                <div class="feat-desc">Mapped behavioural and personality data points across the user journey to build a dynamic profile feeding match-ranking — +86% match quality.</div>
+            </div>
+            <div class="feat rv" style="--i:5">
+                <div class="feat-head"><div class="feat-name">Nutrient deficiency reasoning</div><div class="feat-domain">TinyTaste</div></div>
+                <div class="feat-desc">Per-food nutrient profile × 0–12mo DRI windowed against feeding history — features that drive next-food suggestion and gap detection.</div>
+            </div>
+            <div class="feat rv" style="--i:6">
+                <div class="feat-head"><div class="feat-name">VR-session behavioural fingerprint</div><div class="feat-domain">H-Farm</div></div>
+                <div class="feat-desc">Recorded in-VR sessions reduced to behavioural features that drove iterative system, interaction, and UX improvements across luxury client deployments.</div>
+            </div>
+            <div class="feat rv" style="--i:7">
+                <div class="feat-head"><div class="feat-name">EEG / fMRI emotion features</div><div class="feat-domain">PhD · Genoemote</div></div>
+                <div class="feat-desc">Multimodal physiological-signal fusion (EEG, fMRI, GSR, eye-tracking) into emotion-recognition features for VR-based real-time assessment.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     DEPLOYMENT — where this stuff actually runs
+     ============================================================ -->
+<section class="sec" id="deployment">
+    <div class="container">
+        <div class="sec-head">
+            <p class="sec-label rv">Deployment</p>
+            <h2 class="sec-h rv">Where the systems <em>actually run.</em></h2>
+            <p class="sec-p rv" style="margin:0 auto">The unglamorous infra layer that keeps inference live.</p>
+        </div>
+        <div class="deploy-grid stg">
+            <div class="deploy-card rv" style="--i:0">
+                <div class="deploy-name"><em>VPS</em> · systemd</div>
+                <div class="deploy-detail">Sniperbot lives here — patch script → scp → ssh → systemctl restart. Telegram alerts via shared bot. Auto-halt on drawdown.</div>
+            </div>
+            <div class="deploy-card rv" style="--i:1">
+                <div class="deploy-name"><em>Firebase</em></div>
+                <div class="deploy-detail">Auth, Firestore, Functions for TinyTaste &amp; AIM. Apple Sign-In, Keychain persistence, server-side merge writes.</div>
+            </div>
+            <div class="deploy-card rv" style="--i:2">
+                <div class="deploy-name">App <em>Store</em></div>
+                <div class="deploy-detail">iOS distribution for TinyTaste &amp; AIM. xcodegen-managed projects, version source-of-truth in <code>project.yml</code>.</div>
+            </div>
+            <div class="deploy-card rv" style="--i:3">
+                <div class="deploy-name">GitHub <em>Pages</em></div>
+                <div class="deploy-detail">Marketing surfaces — cogdev.ai, benandemir.com, this portfolio. Static, fast, custom domain via CNAME.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     STACK — methods & tools
+     ============================================================ -->
+<section class="sec sec-warm" id="stack">
+    <div class="container">
+        <div class="sec-head">
+            <p class="sec-label rv">Methods &amp; tools</p>
+            <h2 class="sec-h rv">From <em>brainwaves</em> to backends.</h2>
+            <p class="sec-p rv" style="margin:0 auto">The kit underneath the work — research instruments, modelling stacks, and shipping infrastructure.</p>
+        </div>
+        <div class="stack rv">
+            <div class="stack-grp">
+                <h4>Languages</h4>
+                <ul>
+                    <li>Python <small>data, ML, automation</small></li>
+                    <li>Swift / SwiftUI <small>iOS production</small></li>
+                    <li>JavaScript / Node <small>web, tooling</small></li>
+                    <li>R <small>statistical research</small></li>
+                </ul>
+            </div>
+            <div class="stack-grp">
+                <h4>ML / AI</h4>
+                <ul>
+                    <li>scikit-learn · XGBoost</li>
+                    <li>PyTorch · TensorFlow</li>
+                    <li>Claude / GPT APIs</li>
+                    <li>Fine-tuning · prompt engineering</li>
+                </ul>
+            </div>
+            <div class="stack-grp">
+                <h4>Data</h4>
+                <ul>
+                    <li>pandas · numpy · scipy</li>
+                    <li>Firestore · BigQuery · Postgres</li>
+                    <li>Multimodal fusion <small>EEG · fMRI · GSR · eye-track</small></li>
+                    <li>Orderbook / market microstructure</li>
+                </ul>
+            </div>
+            <div class="stack-grp">
+                <h4>Deploy / Ops</h4>
+                <ul>
+                    <li>Firebase · Cloud Functions</li>
+                    <li>VPS · systemd · cron</li>
+                    <li>GitHub · GitHub Pages · CI</li>
+                    <li>Telegram alerts · monitoring</li>
+                </ul>
+            </div>
+            <div class="stack-grp">
+                <h4>Research instruments</h4>
+                <ul>
+                    <li>EEG <small>physiological signal</small></li>
+                    <li>fMRI <small>neural correlates</small></li>
+                    <li>GSR <small>autonomic arousal</small></li>
+                    <li>Eye-tracking <small>attention &amp; intent</small></li>
+                </ul>
+            </div>
+            <div class="stack-grp">
+                <h4>Statistical</h4>
+                <ul>
+                    <li>Hypothesis testing</li>
+                    <li>Mixed-effects models</li>
+                    <li>Bayesian inference</li>
+                    <li>Calibration · uncertainty quantification</li>
+                </ul>
+            </div>
+            <div class="stack-grp">
+                <h4>Domains</h4>
+                <ul>
+                    <li>Women's health · FemTech</li>
+                    <li>Behavioural science · coaching</li>
+                    <li>Cognitive neuroscience · VR</li>
+                    <li>Quantitative trading · prediction markets</li>
+                </ul>
+            </div>
+            <div class="stack-grp">
+                <h4>Frameworks I use</h4>
+                <ul>
+                    <li>Representational data design</li>
+                    <li>Evidential weighting</li>
+                    <li>Spec-first ML</li>
+                    <li>Individual-level modelling</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     RESEARCH PAPERS
+     ============================================================ -->
+<section class="sec sec-mist" id="research">
+    <div class="container">
+        <div class="sec-head">
+            <p class="sec-label rv">Selected research</p>
+            <h2 class="sec-h rv">Published <em>thinking.</em></h2>
+            <p class="sec-p rv" style="margin:0 auto">Five papers from PhD and earlier research — perception, cognition, AI, and immersive technology. <em>(Add real titles + links to fill in.)</em></p>
+        </div>
+        <div class="papers stg">
+            <article class="paper rv" style="--i:0">
+                <div class="paper-where">PhD · Padova / Edinburgh</div>
+                <h3 class="paper-t">Emotion recognition in VR using EEG, fMRI, and eye-tracking</h3>
+                <div class="paper-meta">Multimodal physiological-signal fusion · 2019</div>
+            </article>
+            <article class="paper rv" style="--i:1">
+                <div class="paper-where">Paper · TODO</div>
+                <h3 class="paper-t">Add paper title here</h3>
+                <div class="paper-meta">Venue · year</div>
+            </article>
+            <article class="paper rv" style="--i:2">
+                <div class="paper-where">Paper · TODO</div>
+                <h3 class="paper-t">Add paper title here</h3>
+                <div class="paper-meta">Venue · year</div>
+            </article>
+            <article class="paper rv" style="--i:3">
+                <div class="paper-where">Paper · TODO</div>
+                <h3 class="paper-t">Add paper title here</h3>
+                <div class="paper-meta">Venue · year</div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section class="sec-ink contact" id="contact">
+    <p class="sec-label rv">Contact</p>
+    <h2 class="sec-h rv" style="text-align:center">Have data that needs <em>interpreting?</em></h2>
+    <p class="sec-p rv" style="text-align:center;margin:0 auto;color:rgba(255,255,255,0.55)">Open for select consulting — predictive system architecture, data &amp; AI function build-out, or a thoughtful conversation about what your data actually means.</p>
+    <div class="contact-actions rv">
+        <a href="mailto:bnndmr@gmail.com" class="btn-dark">bnndmr@gmail.com</a>
+        <a href="https://www.benandemir.com" class="btn-line" target="_blank" rel="noopener">benandemir.com</a>
+        <a href="https://www.cogdev.ai" class="btn-line" target="_blank" rel="noopener">cogdev.ai</a>
+    </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+    © 2026 Benan D. Allan · Built under <a href="https://www.cogdev.ai">CID</a> · <a href="https://www.benandemir.com">benandemir.com</a>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+// scroll progress
+const prog = document.getElementById('prog');
+const nav  = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = ((window.scrollY / h) * 100) + '%';
+    if (window.scrollY > 40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+});
+
+// reveal-on-scroll
+const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s,.wr').forEach(el => io.observe(el));
+
+// drifting particles
+const ptcl = document.getElementById('ptcl');
+for (let i = 0; i < 18; i++) {
+    const s = document.createElement('span');
+    s.style.left = Math.random() * 100 + '%';
+    s.style.animationDuration = (16 + Math.random() * 22) + 's';
+    s.style.animationDelay = -(Math.random() * 20) + 's';
+    s.style.opacity = 0.3 + Math.random() * 0.4;
+    ptcl.appendChild(s);
+}
+
+// mobile nav toggle
+document.getElementById('navTog').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+</script>
+</body>
+</html>
