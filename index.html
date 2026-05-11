@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benan D. Allan — Cognitive & Computer Scientist · Human-AI Interaction</title>
-    <meta name="description" content="Cognitive & Computer Scientist working at the intersection of human data, AI systems, and how people actually think, feel, and make decisions. PhD Padova & Edinburgh — emotion recognition in VR using EEG, fMRI, eye-tracking. Founder of Cognitive Intelligence Development (CID).">
+    <title>Benan D. Allan · Cognitive & Computer Scientist · Human-AI Interaction</title>
+    <meta name="description" content="Cognitive & Computer Scientist working at the intersection of human data, AI systems, and how people actually think, feel, and make decisions. PhD Padova & Edinburgh, emotion recognition in VR using EEG, fMRI, eye-tracking. Founder of Cognitive Intelligence Development (CID).">
     <link rel="canonical" href="https://www.benandemir.com/">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.benandemir.com/">
-    <meta property="og:title" content="Benan D. Allan — Cognitive & Computer Scientist">
+    <meta property="og:title" content="Benan D. Allan · Cognitive & Computer Scientist">
     <meta property="og:description" content="Cognitive scientist working at the layer between cognitive theory and computational implementation. EEG · fMRI · GSR · eye-tracking · multimodal data fusion · human-AI system design.">
     <meta property="og:image" content="https://www.benandemir.com/benan.png">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Benan D. Allan — Cognitive & Computer Scientist">
+    <meta name="twitter:title" content="Benan D. Allan · Cognitive & Computer Scientist">
     <meta name="twitter:image" content="https://www.benandemir.com/benan.png">
 
     <script type="application/ld+json">
@@ -123,7 +123,7 @@
         .nav-links .nb:hover{background:var(--accent);color:white}
         .nav-tog{display:none;background:none;border:none;color:var(--ink);font-size:22px;cursor:pointer}
 
-        /* HERO — split with portrait card */
+        /* HERO: split with portrait card */
         .hero{min-height:100vh;display:flex;align-items:center;padding:140px 40px 120px;position:relative}
         .hero-inner{max-width:1200px;width:100%;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:center}
         .hero-text{position:relative}
@@ -143,10 +143,10 @@
         .btn-line{padding:14px 32px;border-radius:100px;border:1px solid var(--ink-l);color:var(--ink-s);font-weight:500;font-size:14px;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
         .btn-line:hover{border-color:var(--ink-s);color:var(--ink);transform:translateY(-2px)}
 
-        /* PORTRAIT — cutout clipped to circular halo */
+        /* PORTRAIT: cutout clipped to circular halo */
         .portrait-wrap{position:relative;justify-self:center;opacity:0;animation:fu 1s .45s cubic-bezier(.16,1,.3,1) forwards;width:100%;max-width:460px;display:flex;flex-direction:column;align-items:center}
         .portrait-stage{position:relative;width:100%;aspect-ratio:1/1}
-        /* warm circular halo — inner sphere */
+        /* warm circular halo: inner sphere */
         .portrait-halo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:88%;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(184,92,61,0.26),rgba(184,92,61,0.12) 50%,rgba(184,92,61,0) 78%);filter:blur(1px);z-index:0}
         .portrait-halo::before{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 70% 70%,rgba(61,32,102,0.14),transparent 58%)}
         /* dotted rings for movement, sit OUTSIDE the sphere */
@@ -200,7 +200,7 @@
         .sec-h em{font-style:italic;color:var(--warm)}
         .sec-p{color:var(--ink-s);font-size:17px;line-height:1.85;max-width:620px;font-weight:300}
 
-        /* ABOUT — sticky split */
+        /* ABOUT: sticky split */
         .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
         .about-sticky{position:sticky;top:120px}
         .about-quote{font-family:var(--serif);font-size:clamp(22px,2.4vw,28px);line-height:1.5;color:var(--ink);font-style:italic;padding:32px 0;border-top:1px solid var(--ink-l);border-bottom:1px solid var(--ink-l);margin:32px 0}
@@ -209,7 +209,7 @@
         .stat .n{font-family:var(--serif);font-size:44px;color:var(--ink);line-height:1}
         .stat .l{font-size:11px;color:var(--ink-m);text-transform:uppercase;letter-spacing:.1em;font-weight:500;margin-top:6px}
 
-        /* CORE COMPETENCIES — 3 large cards */
+        /* CORE COMPETENCIES: 3 large cards */
         .comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:80px}
         .comp-card{padding:40px 32px;border-radius:24px;background:white;border:1px solid var(--ink-l);transition:all .5s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
         .comp-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px -20px rgba(0,0,0,0.08);border-color:var(--card-c,var(--accent))}
@@ -221,7 +221,7 @@
         .comp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
         .comp-tag{padding:4px 11px;border-radius:100px;font-size:10.5px;font-weight:500;color:var(--ink-s);background:var(--bg-warm);border:1px solid var(--ink-l)}
 
-        /* EXPERIENCE — flowing timeline */
+        /* EXPERIENCE: flowing timeline */
         .exp-list{max-width:920px;margin:80px auto 0;position:relative}
         .exp-list::before{content:'';position:absolute;left:179px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--ink-l) 8%,var(--ink-l) 92%,transparent)}
         @media(max-width:900px){.exp-list::before{display:none}}
@@ -279,7 +279,7 @@
         .ecard .desc{font-size:13px;color:var(--ink-s);line-height:1.7;font-style:italic}
         .ecard .badge{position:absolute;top:18px;right:18px;font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.14em;color:var(--accent);background:var(--accent-l);padding:4px 8px;border-radius:100px}
 
-        /* METHODS — minimalist list */
+        /* METHODS: minimalist list */
         .methods-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:80px}
         .method-row{padding:24px 28px;border-radius:16px;background:white;border:1px solid var(--ink-l);transition:all .3s}
         .method-row:hover{border-color:var(--ink-m);transform:translateX(4px)}
@@ -419,7 +419,7 @@
     <div class="hero-inner">
         <div class="hero-text">
             <p class="hero-eyebrow">Cognitive &amp; Computer Scientist</p>
-            <h1>Between<br><em>cognitive theory</em><br>and computation.<span class="sm">— that's where I work.</span></h1>
+            <h1>Between<br><em>cognitive theory</em><br>and computation.<span class="sm">that's where I work.</span></h1>
             <p class="hero-sub">A decade at the intersection of human data, AI systems, and how people actually think, feel, and make decisions. I work at the layer where cognitive theory becomes computational implementation.</p>
             <div class="hero-meta">
                 <span class="hero-meta-item"><span class="dot" style="display:inline-block;margin-right:8px"></span>Perpignan, France</span>
@@ -428,7 +428,7 @@
             </div>
             <div class="hero-actions">
                 <a href="#contact" class="btn-dark">Get in touch &rarr;</a>
-                <a href="https://www.cogdev.ai" target="_blank" rel="noopener" class="btn-line">CID — Consultancy</a>
+                <a href="https://www.cogdev.ai" target="_blank" rel="noopener" class="btn-line">CID · Consultancy</a>
             </div>
         </div>
         <div class="portrait-wrap">
@@ -478,7 +478,7 @@
             <div class="about-sticky">
                 <p class="sec-label rv">About</p>
                 <h2 class="sec-h rv">What does this<br>human data <em>actually mean?</em></h2>
-                <p class="sec-p rv">That's the core question I've spent the last decade chasing — across very different contexts, but always at the layer between cognitive theory and computational implementation.</p>
+                <p class="sec-p rv">That's the core question I've spent the last decade chasing, across very different contexts, but always at the layer between cognitive theory and computational implementation.</p>
                 <div class="stat-row rv">
                     <div class="stat"><div class="n">10+</div><div class="l">Years across cognitive AI</div></div>
                     <div class="stat"><div class="n">5</div><div class="l">Languages spoken</div></div>
@@ -488,8 +488,8 @@
             </div>
             <div>
                 <blockquote class="about-quote rv">My PhD focused on emotion recognition in VR using EEG, fMRI, and eye-tracking. Since then I've applied that foundation across very different contexts: ovulation prediction from physiological signals, emotion recognition from GSR and speech, automated user journeys from behavioural profiling, and UX experiments on VR training across 10 countries.</blockquote>
-                <p class="sec-p rv">What connects all of it is the same question: what does this human data actually mean, and how should a system interpret and respond to it. Most recently <strong style="color:var(--ink);font-weight:600">Head of Science &amp; AI at Stardust</strong> (women's health, 2024 – March 2026), and currently <strong style="color:var(--ink);font-weight:600">Founder of Cognitive Intelligence Development</strong> — a consultancy focused on the science layer of intelligent systems.</p>
-                <p class="sec-p rv" style="margin-top:18px">Through CID, I'm currently developing <em>Nar</em> — a women's health app covering 9 health domains across 6 hormonal life stages, with full science specification including data point logic, signal weighting, and personalised content triggers.</p>
+                <p class="sec-p rv">What connects all of it is the same question: what does this human data actually mean, and how should a system interpret and respond to it. Most recently <strong style="color:var(--ink);font-weight:600">Head of Science &amp; AI at Stardust</strong> (women's health, 2024 – March 2026), and currently <strong style="color:var(--ink);font-weight:600">Founder of Cognitive Intelligence Development</strong>, a consultancy focused on the science layer of intelligent systems.</p>
+                <p class="sec-p rv" style="margin-top:18px">Through CID, I'm currently developing <em>Nar</em>, a women's health app covering 9 health domains across 6 hormonal life stages, with full science specification including data point logic, signal weighting, and personalised content triggers.</p>
             </div>
         </div>
     </div>
@@ -556,7 +556,7 @@
     <div class="exp-list">
         <div class="exp rv">
             <div>
-                <div class="exp-when">2024 — Mar 2026</div>
+                <div class="exp-when">2024 – Mar 2026</div>
                 <div class="exp-where">Remote</div>
             </div>
             <div class="exp-body">
@@ -573,7 +573,7 @@
         </div>
         <div class="exp rv">
             <div>
-                <div class="exp-when">2023 — Present</div>
+                <div class="exp-when">2023 – Present</div>
                 <div class="exp-where">Remote</div>
             </div>
             <div class="exp-body">
@@ -588,7 +588,7 @@
         </div>
         <div class="exp rv">
             <div>
-                <div class="exp-when">2022 — 2023</div>
+                <div class="exp-when">2022 – 2023</div>
                 <div class="exp-where">Berlin (Remote)</div>
             </div>
             <div class="exp-body">
@@ -602,7 +602,7 @@
         </div>
         <div class="exp rv">
             <div>
-                <div class="exp-when">2021 — 2022</div>
+                <div class="exp-when">2021 – 2022</div>
                 <div class="exp-where">Remote</div>
             </div>
             <div class="exp-body">
@@ -616,7 +616,7 @@
         </div>
         <div class="exp rv">
             <div>
-                <div class="exp-when">2020 — 2023</div>
+                <div class="exp-when">2020 – 2023</div>
                 <div class="exp-where">Miami, FL</div>
             </div>
             <div class="exp-body">
@@ -631,7 +631,7 @@
         </div>
         <div class="exp rv">
             <div>
-                <div class="exp-when">2018 — 2019</div>
+                <div class="exp-when">2018 – 2019</div>
                 <div class="exp-where">Treviso, Italy</div>
             </div>
             <div class="exp-body">
@@ -648,7 +648,7 @@
         </div>
         <div class="exp rv">
             <div>
-                <div class="exp-when">2016 — 2017</div>
+                <div class="exp-when">2016 – 2017</div>
                 <div class="exp-where">Izmir, Turkey</div>
             </div>
             <div class="exp-body">
@@ -687,7 +687,7 @@
         <div style="text-align:center;max-width:680px;margin:0 auto">
             <p class="sec-label rv">Builds</p>
             <h2 class="sec-h rv">Things I've <em>shipped</em> at CID.</h2>
-            <p class="sec-p rv" style="margin:0 auto">Beyond research, I prototype and ship — turning the science layer into actual products.</p>
+            <p class="sec-p rv" style="margin:0 auto">Beyond research, I prototype and ship, turning the science layer into actual products.</p>
         </div>
         <div class="builds stg">
             <div class="bcard rv" style="--i:0;--card-c:#C4868E">
@@ -731,7 +731,7 @@
         <div style="text-align:center;max-width:680px;margin:0 auto">
             <p class="sec-label rv">Select research papers</p>
             <h2 class="sec-h rv">Published <em>thinking.</em></h2>
-            <p class="sec-p rv" style="margin:0 auto">Five papers on ResearchGate from PhD and earlier research — perception, cognition, AI, and immersive technology.</p>
+            <p class="sec-p rv" style="margin:0 auto">Five papers on ResearchGate from PhD and earlier research, perception, cognition, AI, and immersive technology.</p>
         </div>
         <div class="papers stg">
             <div class="paper rv" style="--i:0">
@@ -764,7 +764,7 @@
                     <div class="paper-stat-num">6,600+</div>
                     <div class="sec-label" style="margin:6px 0 0">Total reads on ResearchGate</div>
                 </div>
-                <div class="paper-stat-lbl">Five papers spanning EEG, immersive technology, AR/VR interaction, and the philosophy of mind — together approaching 7k cumulative reads.</div>
+                <div class="paper-stat-lbl">Five papers spanning EEG, immersive technology, AR/VR interaction, and the philosophy of mind, together approaching 7k cumulative reads.</div>
             </div>
         </div>
     </div>
@@ -782,20 +782,20 @@
                 <div class="badge">CARIPARO</div>
                 <div class="deg">PhD Brain, Mind &amp; Computer Science</div>
                 <div class="sch">University of Padova &amp; Edinburgh (Visiting)</div>
-                <div class="yr">2016 — 2019</div>
+                <div class="yr">2016 – 2019</div>
                 <div class="desc">Italian Government scholarship. Research on prejudice and discrimination in VR; emotion recognition using EEG, fMRI, and eye-tracking.</div>
             </div>
             <div class="ecard rv" style="--i:1">
                 <div class="deg">MSc Cognitive Systems &amp; Interactive Media</div>
                 <div class="sch">Pompeu Fabra University, Barcelona</div>
-                <div class="yr">2014 — 2015</div>
+                <div class="yr">2014 – 2015</div>
                 <div class="desc">Research methods for 3D visual stimuli and brain examination via fMRI and EEG. Theoretical models of human cognition and perception.</div>
             </div>
             <div class="ecard rv" style="--i:2">
                 <div class="deg">BA (Hons) Media &amp; Entertainment Technology</div>
                 <div class="sch">University of Portsmouth</div>
-                <div class="yr">2011 — 2014</div>
-                <div class="desc">Dissertation on how VR influences cinema technologies — perceptual realism and dimensions of reality.</div>
+                <div class="yr">2011 – 2014</div>
+                <div class="desc">Dissertation on how VR influences cinema technologies, perceptual realism and dimensions of reality.</div>
             </div>
         </div>
         <div class="lang-bar rv">
