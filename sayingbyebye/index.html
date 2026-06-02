@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Saying Bye Bye · Claim Our Stuff</title>
+<meta name="description" content="We're clearing out the house. Claim what you want, screenshot it, and send it to us.">
+<meta property="og:title" content="Saying Bye Bye 👋 — claim our stuff">
+<meta property="og:description" content="We're clearing out the house. Tap to claim, screenshot it, send it to us.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SAYING BYE BYE — static, no backend. Claims live in the
+   visitor's own browser (localStorage). After claiming they
+   screenshot the page and send it to you.
+   ============================================================ */
+:root{
+  --bg:#F4EFE7; --bg2:#EDE5D8; --ink:#1a1410; --ink-s:rgba(26,20,16,.58);
+  --ink-m:rgba(26,20,16,.32); --line:rgba(26,20,16,.12);
+  --accent:#3D2066; --warm:#D2562E; --peach:#F0A882;
+  --sage:#6F8A5C; --gold:#E0A93B; --pink:#E0578B; --teal:#2E9E92;
+  --card:#FBF8F2; --stamp:#C8341B;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'Space Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans); background:var(--bg); color:var(--ink);
+  min-height:100vh; overflow-x:hidden; position:relative;
+  -webkit-font-smoothing:antialiased;
+}
+/* floating gradient blobs */
+.blob{position:fixed; border-radius:50%; filter:blur(70px); opacity:.5; z-index:0; pointer-events:none; will-change:transform}
+.blob.a{width:46vw;height:46vw;background:var(--peach);top:-10vw;left:-8vw;animation:f1 22s ease-in-out infinite}
+.blob.b{width:38vw;height:38vw;background:var(--accent);opacity:.22;bottom:-8vw;right:-6vw;animation:f2 27s ease-in-out infinite}
+.blob.c{width:30vw;height:30vw;background:var(--teal);opacity:.18;top:38%;right:18%;animation:f3 19s ease-in-out infinite}
+@keyframes f1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,4vw) scale(1.12)}}
+@keyframes f2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-5vw,-3vw) scale(1.1)}}
+@keyframes f3{0%,100%{transform:translate(0,0)}50%{transform:translate(-4vw,5vw)}}
+.wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 22px 120px}
+
+/* marquee */
+.marquee{position:relative;z-index:3;overflow:hidden;border-bottom:2px solid var(--ink);
+  background:var(--ink);color:var(--bg);white-space:nowrap}
+.marquee .track{display:inline-block;padding:9px 0;animation:slide 24s linear infinite;font-family:var(--mono);
+  font-size:13px;letter-spacing:.18em;text-transform:uppercase}
+.marquee .track span{padding:0 26px}
+.marquee .track i{color:var(--gold);font-style:normal}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* hero */
+header{padding:54px 0 22px;text-align:center}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--warm);margin-bottom:14px}
+h1{font-family:var(--serif);font-weight:400;line-height:.92;letter-spacing:-.02em;
+  font-size:clamp(58px,15vw,150px)}
+h1 .it{font-style:italic}
+h1 .wave{display:inline-block;transform-origin:70% 70%;animation:wave 2.6s ease-in-out infinite}
+@keyframes wave{0%,60%,100%{transform:rotate(0)}10%{transform:rotate(16deg)}20%{transform:rotate(-10deg)}30%{transform:rotate(16deg)}40%{transform:rotate(-6deg)}50%{transform:rotate(10deg)}}
+.sub{max-width:560px;margin:20px auto 0;font-size:clamp(16px,2.4vw,19px);line-height:1.55;color:var(--ink-s)}
+.sub b{color:var(--ink);font-weight:600}
+
+/* screenshot reminder banner */
+.howto{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:stretch;margin:30px auto 0;max-width:760px}
+.step{flex:1 1 200px;background:var(--card);border:1.5px solid var(--ink);border-radius:16px;padding:14px 16px;
+  box-shadow:4px 4px 0 var(--ink);display:flex;gap:12px;align-items:center;text-align:left}
+.step .n{font-family:var(--serif);font-size:34px;line-height:1;color:var(--warm)}
+.step .t{font-size:14px;line-height:1.35}
+.step .t b{display:block;font-size:15px;margin-bottom:2px}
+
+/* toolbar */
+.bar{position:sticky;top:0;z-index:30;margin:34px 0 26px;padding:12px 0;
+  background:color-mix(in srgb,var(--bg) 86%, transparent);backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  padding:9px 15px;border:1.5px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);
+  cursor:pointer;transition:.15s}
+.filters button:hover{background:var(--ink);color:var(--bg)}
+.filters button.on{background:var(--ink);color:var(--bg)}
+.count{font-family:var(--mono);font-size:13px;color:var(--ink-s)}
+.count b{color:var(--warm)}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:20px}
+.card{position:relative;background:var(--card);border:1.5px solid var(--ink);border-radius:20px;overflow:hidden;
+  cursor:pointer;transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s;
+  box-shadow:6px 6px 0 var(--ink);display:flex;flex-direction:column}
+.card:hover{transform:translateY(-4px) rotate(-.6deg);box-shadow:9px 12px 0 var(--ink)}
+.card:active{transform:scale(.985)}
+.thumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:74px;position:relative;
+  border-bottom:1.5px solid var(--ink);overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.tag{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1.5px solid var(--ink);background:var(--bg);z-index:2}
+.tag.free{background:var(--sage);color:#fff;border-color:var(--ink)}
+.tag.sale{background:var(--gold);color:var(--ink)}
+.body{padding:16px 17px 18px;flex:1;display:flex;flex-direction:column;gap:7px}
+.body h3{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.05}
+.body p{font-size:13.5px;line-height:1.45;color:var(--ink-s);flex:1}
+.price{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--ink)}
+.price.free{color:var(--sage)}
+.claimbtn{margin-top:8px;width:100%;padding:11px;border:1.5px solid var(--ink);border-radius:12px;background:var(--ink);
+  color:var(--bg);font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+  cursor:pointer;transition:.15s}
+.card:hover .claimbtn{background:var(--warm);border-color:var(--ink)}
+
+/* claimed state */
+.card.claimed{box-shadow:6px 6px 0 var(--ink)}
+.card.claimed .body,.card.claimed .thumb{opacity:.42;filter:grayscale(.4)}
+.card.claimed .claimbtn{background:transparent;color:var(--ink);opacity:.42}
+.stamp{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%) rotate(-15deg) scale(.4);
+  font-family:var(--mono);font-weight:700;font-size:clamp(26px,5vw,40px);letter-spacing:.06em;
+  color:var(--stamp);border:5px solid var(--stamp);padding:8px 18px;border-radius:10px;text-transform:uppercase;
+  opacity:0;pointer-events:none;z-index:5;white-space:nowrap;
+  box-shadow:0 0 0 2px var(--card);text-shadow:0 0 2px rgba(0,0,0,.15)}
+.card.claimed .stamp{opacity:.92;animation:stampin .35s cubic-bezier(.2,1.4,.5,1) forwards}
+@keyframes stampin{0%{transform:translate(-50%,-50%) rotate(-15deg) scale(1.8);opacity:0}
+  60%{opacity:1}100%{transform:translate(-50%,-50%) rotate(-15deg) scale(1);opacity:.92}}
+.mine{position:absolute;bottom:10px;right:12px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--warm);z-index:6;opacity:0}
+.card.claimed .mine{opacity:1}
+
+/* footer */
+footer{text-align:center;margin-top:60px;font-family:var(--mono);font-size:12px;color:var(--ink-m);letter-spacing:.06em}
+footer a{color:var(--warm);text-decoration:none}
+
+/* empty */
+.empty{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--ink-m);font-family:var(--serif);font-size:26px;font-style:italic}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(140%);z-index:60;
+  background:var(--ink);color:var(--bg);padding:14px 22px;border-radius:14px;font-size:14px;font-weight:500;
+  box-shadow:5px 5px 0 var(--warm);transition:transform .3s cubic-bezier(.2,1.3,.5,1);max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast b{color:var(--gold)}
+
+#fx{position:fixed;inset:0;z-index:55;pointer-events:none}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important}
+  .marquee .track{animation:none}
+}
+@media (max-width:560px){
+  .step{flex:1 1 100%}
+  .bar{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<div class="blob a"></div><div class="blob b"></div><div class="blob c"></div>
+<canvas id="fx"></canvas>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track" id="mtrack"></div>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="kicker">Benan &amp; Demir · clearing out the house</div>
+    <h1>Saying <span class="it">bye&nbsp;bye</span> <span class="wave">👋</span></h1>
+    <p class="sub">We're moving things on. Some for sale, some completely <b>free</b> — first to claim it gets it. <b>Tap anything you want</b>, then send us a screenshot. That's it.</p>
+
+    <div class="howto">
+      <div class="step"><div class="n">1</div><div class="t"><b>Tap to claim</b>It stamps CLAIMED. Tap again to release it.</div></div>
+      <div class="step"><div class="n">2</div><div class="t"><b>Screenshot the page</b>Showing everything you've claimed.</div></div>
+      <div class="step"><div class="n">3</div><div class="t"><b>Send it to us</b>We'll confirm &amp; sort pickup. 📸</div></div>
+    </div>
+  </header>
+
+  <div class="bar">
+    <div class="filters" id="filters">
+      <button class="on" data-f="all">Everything</button>
+      <button data-f="free">Free stuff</button>
+      <button data-f="sale">For sale</button>
+      <button data-f="mine">My claims</button>
+    </div>
+    <div class="count" id="count"></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    made with love · <a id="contact" href="#">send your screenshot →</a><br>
+    <span style="opacity:.6">claims are saved on your device only — screenshot to make it count</span>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   1) EDIT YOUR STUFF HERE.
+   Each item: { id, name, desc, price (number) OR free:true, emoji, img (optional URL) }
+   - id must be unique & stable (don't reuse).
+   - emoji shows if there's no img. Drop a photo by setting img:'photo.jpg'
+     and putting the file in this same /sayingbyebye/ folder.
+   ============================================================ */
+const ITEMS = [
+  { id:'sofa',    name:'Linen 2-seater sofa', desc:'Comfy, one small mark on the arm. Pickup only.', price:120, emoji:'🛋️' },
+  { id:'lamp',    name:'Brass floor lamp',    desc:'Warm dimmable bulb included.',                    price:35,  emoji:'💡' },
+  { id:'books',   name:'Box of novels',       desc:'~30 paperbacks, take the lot.',                   free:true, emoji:'📚' },
+  { id:'plant',   name:'Big monstera',        desc:'Thriving. Needs a bright corner.',                free:true, emoji:'🪴' },
+  { id:'kettle',  name:'Stovetop kettle',     desc:'Barely used, whistles nicely.',                   price:10,  emoji:'🫖' },
+  { id:'bike',    name:"Kid's bike",          desc:'16", good condition, one rusty bolt.',            price:25,  emoji:'🚲' },
+  { id:'rug',     name:'Wool rug 160×230',    desc:'Neutral, recently cleaned.',                      price:45,  emoji:'🧶' },
+  { id:'plates',  name:'Dinnerware set',      desc:'8 plates + bowls, no chips.',                     free:true, emoji:'🍽️' },
+];
+
+/* Where people send their screenshot. Set ONE of these. */
+const CONTACT = {
+  whatsapp:'',                 // e.g. '33612345678' (country code, no +) — opens WhatsApp
+  email:'bnndmr@gmail.com'     // fallback / used if whatsapp is empty
+};
+/* ============================================================ */
+
+const KEY='sbb_claims_v1';
+const grid=document.getElementById('grid');
+const countEl=document.getElementById('count');
+const toastEl=document.getElementById('toast');
+let claims=load();
+let filter='all';
+
+function load(){ try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}} }
+function save(){ localStorage.setItem(KEY,JSON.stringify(claims)); }
+
+function priceLabel(it){ return it.free?'FREE':'£'+it.price; }
+
+function render(){
+  const list=ITEMS.filter(it=>{
+    if(filter==='free') return it.free;
+    if(filter==='sale') return !it.free;
+    if(filter==='mine') return claims[it.id];
+    return true;
+  });
+  grid.innerHTML = list.length ? '' : '<div class="empty">nothing here yet ✨</div>';
+  for(const it of list){
+    const claimed=!!claims[it.id];
+    const card=document.createElement('div');
+    card.className='card'+(claimed?' claimed':'');
+    card.dataset.id=it.id;
+    const tagCls=it.free?'free':'sale';
+    const tagTxt=it.free?'Free':'For sale';
+    const thumb=it.img
+      ? `<img src="${it.img}" alt="${esc(it.name)}" loading="lazy">`
+      : `<span>${it.emoji||'📦'}</span>`;
+    card.innerHTML=`
+      <div class="thumb">
+        <span class="tag ${tagCls}">${tagTxt}</span>
+        ${thumb}
+        <div class="stamp">Claimed ✓</div>
+        <div class="mine">★ yours</div>
+      </div>
+      <div class="body">
+        <h3>${esc(it.name)}</h3>
+        <p>${esc(it.desc||'')}</p>
+        <div class="price ${it.free?'free':''}">${priceLabel(it)}</div>
+        <button class="claimbtn">${claimed?'Tap to release':'Claim it'}</button>
+      </div>`;
+    card.addEventListener('click',()=>toggle(it,card));
+    grid.appendChild(card);
+  }
+  updateCount();
+}
+
+function toggle(it,card){
+  const nowClaimed=!claims[it.id];
+  if(nowClaimed){
+    claims[it.id]=true; save();
+    card.classList.add('claimed');
+    card.querySelector('.claimbtn').textContent='Tap to release';
+    burst(card);
+    toast(`Claimed <b>${esc(it.name)}</b> — now screenshot &amp; send it to us 📸`);
+  }else{
+    delete claims[it.id]; save();
+    card.classList.remove('claimed');
+    card.querySelector('.claimbtn').textContent='Claim it';
+    toast(`Released <b>${esc(it.name)}</b> — back up for grabs`);
+  }
+  if(filter==='mine') setTimeout(render,250);
+  updateCount();
+}
+
+function updateCount(){
+  const mine=Object.keys(claims).filter(id=>ITEMS.some(i=>i.id===id)).length;
+  const total=ITEMS.length;
+  countEl.innerHTML=`<b>${mine}</b> claimed by you · ${total} items`;
+}
+
+/* filters */
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  filter=b.dataset.f;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));
+  render();
+});
+
+/* contact link */
+(function(){
+  const a=document.getElementById('contact');
+  if(CONTACT.whatsapp){
+    a.href='https://wa.me/'+CONTACT.whatsapp+'?text='+encodeURIComponent("Hi! I claimed some things on your page 👋");
+    a.target='_blank'; a.rel='noopener';
+  }else{
+    a.href='mailto:'+CONTACT.email+'?subject='+encodeURIComponent('I claimed some of your stuff');
+  }
+})();
+
+/* marquee */
+(function(){
+  const phrases=['Everything must go','Saying bye bye 👋','Tap it · claim it','Free stuff inside','Screenshot &amp; send','First come first served'];
+  const one=phrases.map(p=>`<span>${p} <i>✦</i></span>`).join('');
+  document.getElementById('mtrack').innerHTML=one+one;
+})();
+
+/* toast */
+let tT;
+function toast(html){
+  toastEl.innerHTML=html; toastEl.classList.add('show');
+  clearTimeout(tT); tT=setTimeout(()=>toastEl.classList.remove('show'),2800);
+}
+
+/* confetti */
+const cv=document.getElementById('fx'), ctx=cv.getContext('2d');
+let parts=[],raf=null;
+function size(){cv.width=innerWidth;cv.height=innerHeight}
+size(); addEventListener('resize',size);
+const COLORS=['#D2562E','#3D2066','#E0A93B','#6F8A5C','#E0578B','#2E9E92','#F0A882'];
+function burst(card){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const r=card.getBoundingClientRect();
+  const x=r.left+r.width/2, y=r.top+r.height/2;
+  for(let i=0;i<70;i++){
+    const a=Math.random()*Math.PI*2, sp=4+Math.random()*9;
+    parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-3,
+      g:.22+Math.random()*.12, s:5+Math.random()*7, life:60+Math.random()*30,
+      c:COLORS[i%COLORS.length], rot:Math.random()*6, vr:(-.3+Math.random()*.6)});
+  }
+  if(!raf)raf=requestAnimationFrame(loop);
+}
+function loop(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  parts=parts.filter(p=>p.life>0);
+  for(const p of parts){
+    p.vy+=p.g; p.x+=p.vx; p.y+=p.vy; p.life--; p.rot+=p.vr; p.vx*=.99;
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+    ctx.globalAlpha=Math.max(0,Math.min(1,p.life/30));
+    ctx.fillStyle=p.c; ctx.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);
+    ctx.restore();
+  }
+  if(parts.length)raf=requestAnimationFrame(loop); else{raf=null;ctx.clearRect(0,0,cv.width,cv.height);}
+}
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+render();
+</script>
+</body>
+</html>
