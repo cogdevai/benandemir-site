@@ -202,14 +202,7 @@ footer a{color:var(--warm);text-decoration:none}
      and putting the file in this same /sayingbyebye/ folder.
    ============================================================ */
 const ITEMS = [
-  { id:'sofa',    name:'Linen 2-seater sofa', desc:'Comfy, one small mark on the arm. Pickup only.', price:120, emoji:'🛋️' },
-  { id:'lamp',    name:'Brass floor lamp',    desc:'Warm dimmable bulb included.',                    price:35,  emoji:'💡' },
-  { id:'books',   name:'Box of novels',       desc:'~30 paperbacks, take the lot.',                   free:true, emoji:'📚' },
-  { id:'plant',   name:'Big monstera',        desc:'Thriving. Needs a bright corner.',                free:true, emoji:'🪴' },
-  { id:'kettle',  name:'Stovetop kettle',     desc:'Barely used, whistles nicely.',                   price:10,  emoji:'🫖' },
-  { id:'bike',    name:"Kid's bike",          desc:'16", good condition, one rusty bolt.',            price:25,  emoji:'🚲' },
-  { id:'rug',     name:'Wool rug 160×230',    desc:'Neutral, recently cleaned.',                      price:45,  emoji:'🧶' },
-  { id:'plates',  name:'Dinnerware set',      desc:'8 plates + bowls, no chips.',                     free:true, emoji:'🍽️' },
+  { id:'loungers', name:'2 sun loungers', desc:'Pair of coral loungers on wheels. Reclining, great by the pool. Side table not included.', price:50, img:'sun-loungers.jpg', emoji:'🌞' },
 ];
 
 /* Where people send their screenshot. Set ONE of these. */
@@ -229,7 +222,7 @@ let filter='all';
 function load(){ try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}} }
 function save(){ localStorage.setItem(KEY,JSON.stringify(claims)); }
 
-function priceLabel(it){ return it.free?'FREE':'£'+it.price; }
+function priceLabel(it){ return it.free?'FREE':'€'+it.price; }
 
 function render(){
   const list=ITEMS.filter(it=>{
